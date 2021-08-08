@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getMovies } from '../../api/movies';
+import { Movie } from '../../components/Movie';
 import { fetchDefaultMovies } from '../../redux/movies/actions';
 import { Store } from '../../redux/store/types';
+import { ScreenContainer } from './styles';
 
 export const MainScreen = () => {
      const dispatch = useDispatch();
@@ -12,17 +14,13 @@ export const MainScreen = () => {
         dispatch(fetchDefaultMovies(searchValue));
     }, []);
     return (
-        <div>
-            <h1>Hello</h1>
-            <div>
+    
+            <ScreenContainer>
                 {movies?.map((movie,index) => {
                     return(
-                        <div key={index}>
-                            <h1>{movie.Title}</h1>
-                        </div>
+                      <Movie key={index} {...movie} />
                     )
                 })}
-            </div>
-        </div>
+            </ScreenContainer>
     )
 }
